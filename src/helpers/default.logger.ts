@@ -1,6 +1,5 @@
 import { configure, getLogger } from 'log4js';
-// import { environment } from '../../config/env';
-import { environment } from '@/config/env';
+import { environment } from 'src/config/env';
 
 configure({
   appenders: {

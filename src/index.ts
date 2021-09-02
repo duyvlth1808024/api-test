@@ -2,7 +2,10 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
+
+import { initSwagger } from './config/swagger';
 import { logger } from './helpers/default.logger';
+import testRoute from './api/v1/test/test.controller';
 
 const PORT = 8080;
 const corsOptions = {
@@ -22,10 +25,8 @@ router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
 router.use(express.json());
 
-
-app.get('/ping', (req: Request, res: Response) => {
-  return res.send('pong...');
-});
+initSwagger(app);
+app.use('/v1', testRoute);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   const error = new Error('not found');
